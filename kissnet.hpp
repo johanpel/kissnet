@@ -896,7 +896,7 @@ namespace kissnet
 				if (!(static_cast<bool>(syscall_connect(sock, reinterpret_cast<SOCKADDR*>(&socket_output), sizeof(SOCKADDR)) != SOCKET_ERROR)))
 					return false;
 
-				auto* pMethod = TLSv1_2_client_method();
+				auto* pMethod = TLS_client_method();
 
 				pContext = SSL_CTX_new(pMethod);
 				pSSL = SSL_new(pContext);
