@@ -857,6 +857,15 @@ namespace kissnet
 				kissnet_fatal_error("setting socket broadcast mode returned an error");
 		}
 
+		///Set the socket option to reuse address and port.
+		/// \param state By default "false". If put to true, it will enable reuse.
+		void set_reuse(bool state = true) const
+		{
+			const int reuse = state ? 1 : 0;
+			if(setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<const char*>(&reuse), sizeof(reuse)) != 0)
+				kissnet_fatal_error("setting socket to reuse address returned an error");
+		}
+
 		///Bind socket locally using the address and port of the endpoint
 		void bind()
 		{
